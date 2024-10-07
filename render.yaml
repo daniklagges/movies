@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: movie-rental-system
+    env: ruby
+    region: oregon
+    buildCommand: |
+      bundle install
+      yarn install
+      rails assets:precompile
+      yarn build
+    startCommand: bundle exec puma -C config/puma.rb
+    plan: free
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
